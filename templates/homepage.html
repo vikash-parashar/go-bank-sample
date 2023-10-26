@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Tilt+Neon&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&family=Tilt+Neon&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&display=swap');
+
+        #cname {
+            font-family: 'Jost', sans-serif;
+            font-style: normal;
+            font-size: medium;
+            color: black;
+        }
+
+        a {
+            font-family: 'Josefin Sans', sans-serif;
+            font-style: normal;
+            font-size: medium;
+            color: black;
+        }
+
+        /* Add custom CSS styles here */
+        .navbar-brand img {
+            margin-right: 10px;
+        }
+
+        .navbar-nav .nav-link {
+            padding: 1px 20px;
+        }
+
+        .nav-item .nav-link {
+            color: #4cb7e9;
+        }
+
+        .nav-link:hover {
+            background-color: #ffffff;
+        }
+
+        .dropdown-menu {
+            min-width: 300px;
+            height: 45vh;
+            background-color: #033025c0;
+        }
+
+
+
+        .dropdown-item-text {
+            font-family: 'Josefin Sans', sans-serif;
+            margin-top: 20px;
+            font-size: 15px;
+            color: aliceblue;
+        }
+
+        img {
+            height: 35px;
+            width: 35px;
+        }
+
+        .footer {
+            margin-top: 82.9vh;
+            padding: 15px 0;
+            font-family: 'Josefin Sans', sans-serif;
+        }
+
+        #navbarNav {
+            margin-left: 130px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="/static/images/asset.png" alt="Asset Locator Logo" width="30" height="30"> Asset Locator</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/api/v1/power-details">Power Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/api/v1/fiber-details">Fiber Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/api/v1/owner-details">Owner Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/api/v1/location-details">Location Details</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Update your HTML to include placeholders for user details -->
+            <div class="nav-item" id="userDropdownContainer">
+                <a class="nav-link" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="/static/images/usericon.png" alt="profile">
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    <p class="dropdown-item-text">First Name : <span id="firstNamePlaceholder">Loading...</span></p>
+                    <p class="dropdown-item-text">Last Name : <span id="lastNamePlaceholder">Loading...</span></p>
+                    <p class="dropdown-item-text">Phone : <span id="phonePlaceholder">Loading...</span></p>
+                    <p class="dropdown-item-text">Email : <span id="emailPlaceholder">Loading...</span></p>
+                    <p class="dropdown-item-text">Role : <span id="rolePlaceholder">Loading...</span></p>
+                    <div class="text-center">
+                        <button class="btn btn-danger ml-2"><a href="/logout">Logout</a></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <div class="content">
+                    <h2>Welcome to Device Management Portal</h2>
+                    <p class="mt-5">Are you ready to streamline your device management processes?
+                        <br>Our Device Management Portal provides comprehensive solutions for organizing, tracking, and
+                        optimizing your IT infrastructure.
+                        <br>From device locations to maintenance and power consumption, our platform offers a
+                        centralized hub to manage it all.
+                        <br>Explore our robust features, effortlessly update records, and enhance your operational
+                        efficiency.
+                        <br>Join us in simplifying device management and take control of your IT assets like never
+                        before.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    &copy; 2023 Your Company. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!-- Bootstrap JS (jQuery and Popper.js required) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/notie"></script>
+    <script>
+        function notify(type, msg) {
+            notie.alert({
+                type: type,
+                text: msg,
+                position: 'top'
+            })
+        }
+        // Function to handle logout
+        function handleLogout() {
+            fetch("/logout", {
+                method: "POST",
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        notify(1, data.message);
+                        window.location.href = "http://localhost:8080"; // Redirect to the login page
+                    } else {
+                        notify(2, data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error("An error occurred while logging out:", error);
+                    notify(3, "An error occurred while logging out.");
+                });
+        }
+
+        // Attach the handleLogout function to the logout button's click event
+        const logoutButton = document.getElementById("logout-button");
+        logoutButton.addEventListener("click", handleLogout);
+
+
+        // Function to fetch and display user details
+        function fetchCurrentUserDetails() {
+            $.ajax({
+                url: '/get-current-user',
+                type: 'GET',
+                success: function (data) {
+                    // Assuming the API response contains user details
+                    // Update the placeholders in the dropdown menu
+                    $('#firstNamePlaceholder').text(data.firstName);
+                    $('#lastNamePlaceholder').text(data.lastName);
+                    $('#phonePlaceholder').text(data.phone);
+                    $('#emailPlaceholder').text(data.email);
+                    $('#rolePlaceholder').text(data.role);
+                },
+                error: function (error) {
+                    console.log('Error fetching user details:', error);
+                }
+            });
+        }
+
+        // Add an event listener to fetch user details when the page loads
+        $(document).ready(function () {
+            fetchCurrentUserDetails();
+        });
+    </script>
+</body>
+
+</html>

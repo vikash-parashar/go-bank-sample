@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
+    <style>
+        /* Google Font Link */
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Jost:wght@900&display=swap');
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Josefin Sans', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #9EB384;
+            padding: 30px;
+        }
+
+        .container {
+            position: relative;
+            max-width: 850px;
+            width: 100%;
+            background: #CEDEBD;
+            padding: 40px 30px;
+            perspective: 2700px;
+        }
+
+        .container .cover {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            height: 100%;
+            width: 50%;
+            z-index: 98;
+            transition: all 1s ease;
+            transform-origin: left;
+            transform-style: preserve-3d;
+        }
+
+        .container #flip:checked~.cover {
+            transform: rotateY(-180deg);
+        }
+
+        .container .cover .front,
+        .container .cover .back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .cover .back {
+            transform: rotateY(180deg);
+            backface-visibility: hidden;
+        }
+
+        .container .cover::before,
+        .container .cover::after {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background: #A7D397;
+            opacity: 1;
+            z-index: 12;
+        }
+
+        .container .cover::after {
+            opacity: 1;
+            transform: rotateY(180deg);
+            backface-visibility: hidden;
+        }
+
+        .container .cover img {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            z-index: 10;
+        }
+
+        .container .cover .text {
+            position: absolute;
+            z-index: 130;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cover .text .text-1,
+        .cover .text .text-2 {
+            font-size: 26px;
+            font-weight: 600;
+            color: #CEDEBD;
+            text-align: center;
+        }
+
+        .cover .text .text-2 {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .container .forms {
+            height: 100%;
+            width: 100%;
+            background: #CEDEBD;
+        }
+
+        .container .form-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .form-content .login-form,
+        .form-content .signup-form {
+            width: calc(100% / 2 - 25px);
+        }
+
+        .forms .form-content .title {
+            position: relative;
+            font-size: 24px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .forms .form-content .title:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 25px;
+            background: #FFF5E0;
+        }
+
+        .forms .signup-form .title:before {
+            width: 20px;
+        }
+
+        .forms .form-content .input-boxes {
+            margin-top: 30px;
+        }
+
+        .forms .form-content .input-box {
+            display: flex;
+            align-items: center;
+            height: 50px;
+            width: 100%;
+            margin: 10px 0;
+            position: relative;
+        }
+
+        .form-content .input-box input {
+            height: 100%;
+            width: 100%;
+            outline: none;
+            border: none;
+            padding: 0 30px;
+            font-size: 16px;
+            font-weight: 500;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .form-content .input-box input:focus,
+        .form-content .input-box input:valid {
+            border-color: #FFF5E0;
+        }
+
+        .form-content .input-box i {
+            position: absolute;
+            color: #FFF5E0;
+            font-size: 17px;
+        }
+
+        .forms .form-content .text {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .forms .form-content .text a {
+            text-decoration: none;
+        }
+
+        .forms .form-content .text a:hover {
+            text-decoration: underline;
+        }
+
+        .forms .form-content .button {
+            color: #fff;
+            margin-top: 40px;
+        }
+
+        .forms .form-content .button input {
+            color: #fff;
+            background: #1450A3;
+            border-radius: 6px;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            width: 160px;
+        }
+
+        .forms .form-content .button input:hover {
+            background: #4F709C;
+        }
+
+        .forms .form-content label {
+            color: #4F709C;
+            cursor: pointer;
+        }
+
+        .forms .form-content label:hover {
+            text-decoration: underline;
+        }
+
+        .forms .form-content .login-text,
+        .forms .form-content .sign-up-text {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .container #flip {
+            display: none;
+        }
+
+        @media (max-width: 730px) {
+            .container .cover {
+                display: none;
+            }
+
+            .form-content .login-form,
+            .form-content .signup-form {
+                width: 100%;
+            }
+
+            .form-content .signup-form {
+                display: none;
+            }
+
+            .container #flip:checked~.forms .signup-form {
+                display: block;
+            }
+
+            .container #flip:checked~.forms .login-form {
+                display: none;
+            }
+        }
+
+        .notie-container {
+            box-shadow: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input type="checkbox" id="flip">
+        <div class="cover">
+            <div class="front">
+                <!-- <img src="images/frontImg.jpg" alt=""> -->
+            </div>
+            <div class="back">
+                <!--<img class="backImg" src="images/backImg.jpg" alt="">-->
+                <div class="text">
+                    <span class="text-1">Complete miles of journey <br> with one step</span>
+                    <span class="text-2">Let's get started</span>
+                </div>
+            </div>
+        </div>
+        <div class="forms">
+            <div class="form-content">
+                <div class="login-form">
+                    <div class="title">Login</div>
+                    <form id="login-form" action="#">
+                        <div class="input-boxes">
+                            <div class="input-box">
+                                <i class="fas fa-envelope"></i>
+                                <input id="login-email" name="email" type="text" placeholder="Enter your email"
+                                    required>
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-lock"></i>
+                                <input id="login-password" name="password" type="password"
+                                    placeholder="Enter your password" required>
+                            </div>
+                            <div><a href="/forget-password-page">Forgot password?</a></div>
+                            <div class="button input-box">
+                                <input id="login-submit" type="submit" value="Submit">
+                            </div>
+                            <div class="text sign-up-text">Don't have an account? <label for="flip">Signup now</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- ... (Your existing HTML code) ... -->
+                <div class="signup-form">
+                    <div class="title">Signup</div>
+                    <form id="register-form" action="#"> <!-- Change the form action to the signup route -->
+                        <div class="input-boxes">
+                            <div class="input-box">
+                                <i class="fas fa-user"></i>
+                                <input id="first_name" name="first_name" type="text" placeholder="Enter your first name"
+                                    required>
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-user"></i>
+                                <input id="last_name" name="last_name" type="text" placeholder="Enter your last name"
+                                    required>
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-user"></i>
+                                <input id="phone" name="phone" type="text" placeholder="Enter your phone" required>
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-envelope"></i>
+                                <input id="register-email" name="email" type="text" placeholder="Enter your email"
+                                    required>
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-lock"></i>
+                                <input id="register-password" name="password" type="password"
+                                    placeholder="Enter your password" required>
+                            </div>
+                            <div class="button input-box">
+                                <input id="register-submit" type="submit" value="Submit">
+                            </div>
+                            <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <script src="https://unpkg.com/notie"></script>
+        <!-- ... (Your HTML code) ... -->
+
+        <script>
+            function notify(type, msg) {
+                notie.alert({
+                    type: type,
+                    text: msg,
+                    position: 'top'
+                })
+            }
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const registerForm = document.getElementById("register-form");
+
+                registerForm.addEventListener("submit", async function (event) {
+                    event.preventDefault();
+                    try {
+                        const firstName = document.getElementById("first_name").value;
+                        const lastName = document.getElementById("last_name").value;
+                        const phone = document.getElementById("phone").value;
+                        const email = document.getElementById("register-email").value;
+                        const password = document.getElementById("register-password").value;
+
+                        const response = await fetch("/signup", {
+                            method: "POST",
+                            body: JSON.stringify({
+                                first_name: firstName,
+                                last_name: lastName,
+                                phone: phone,
+                                email: email,
+                                password: password,
+                            }),
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        });
+
+                        if (!response.ok) {
+                            const data = await response.json();
+                            console.error("Signup error:", data);
+                            notify("warning", data.message || "Something went wrong. Please try again.");
+                        } else {
+                            notify("success", "Registration successful. You can now log in.");
+                            setTimeout(() => {
+                                window.location.href = "http://localhost:8080";
+                            }, 2000);
+                        }
+                    } catch (error) {
+                        console.error("Signup error:", error);
+                        notify("error", "An error occurred. Please try again later.");
+                    }
+                });
+            });
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const loginForm = document.getElementById("login-form");
+
+                loginForm.addEventListener("submit", async function (event) {
+                    event.preventDefault();
+                    try {
+                        const email = document.getElementById("login-email").value;
+                        const password = document.getElementById("login-password").value;
+
+                        const formData = new FormData(); // Create a new FormData object
+                        formData.append("email", email);
+                        formData.append("password", password);
+
+                        const response = await fetch("/login", {
+                            method: "POST",
+                            body: formData, // Send the form data
+                        });
+
+                        if (!response.ok) {
+                            const data = await response.json();
+                            console.error("Login error:", data);
+                            notify("warning", data.message || "Login failed. Please check your credentials.");
+                        } else {
+                            notify("success", "Login successful. Redirecting...");
+                            setTimeout(() => {
+                                window.location.href = "http://localhost:8080/api/v1/homepage";
+                            }, 2000);
+                        }
+                    } catch (error) {
+                        console.error("Login error:", error);
+                        notify("error", "An error occurred. Please try again later.");
+                    }
+                });
+            });
+
+        </script>
+</body>
+
+</html>
+
+</body>
+
+</html>
